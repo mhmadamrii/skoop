@@ -5,14 +5,14 @@ export const MOCK_CREATORS: Creator[] = [
     id: 'c1',
     name: 'Dr. Science',
     verified: true,
-    bio: 'Making physics feel like magic.'
+    bio: 'Making physics feel like magic.',
   },
   {
     id: 'c2',
     name: 'Polyglot Paul',
     verified: false,
-    bio: 'Learn 5 languages in 90-second chunks.'
-  }
+    bio: 'Learn 5 languages in 90-second chunks.',
+  },
 ];
 
 export const MOCK_LESSONS: Lesson[] = [
@@ -26,9 +26,9 @@ export const MOCK_LESSONS: Lesson[] = [
       id: 'v1',
       url: 'https://example.com/video1.mp4',
       thumbnailUrl: 'https://example.com/thumb1.jpg',
-      duration: 55
+      duration: 55,
     },
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
   },
   {
     id: 'l2',
@@ -40,8 +40,8 @@ export const MOCK_LESSONS: Lesson[] = [
       id: 'v2',
       url: 'https://example.com/video2.mp4',
       thumbnailUrl: 'https://example.com/thumb2.jpg',
-      duration: 82
+      duration: 82,
     },
-    createdAt: new Date().toISOString()
-  }
+    createdAt: new Date().toISOString(),
+  },
 ];
