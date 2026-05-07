@@ -1,13 +1,12 @@
 # Visual Assets & Decisions — Human Handoff
 
-What you (human) need to do so I (Claude) can build the Skoop UI on-brand.
-Two parts: **decisions** only you can make, then **assets** to generate via
-your image-gen AI.
+What you (human) need to do so I (Claude) can build the Skoop UI on-brand. Two
+parts: **decisions** only you can make, then **assets** to generate via your
+image-gen AI.
 
-Everything below is anchored to `PRODUCT.md` and `DESIGN.md`. North Star:
-**"The Warung Lantern."** Saffron-family hue carries non-feed chrome; feed
-stays nearly monochrome so video wins. Single geometric sans, flat chrome,
-OS-driven theme.
+Everything below is anchored to `PRODUCT.md` and `DESIGN.md`. North Star: **"The
+Warung Lantern."** Saffron-family hue carries non-feed chrome; feed stays nearly
+monochrome so video wins. Single geometric sans, flat chrome, OS-driven theme.
 
 ---
 
@@ -18,10 +17,10 @@ Keep this identical across every asset so the system reads as one app.
 > **Style:** warm saffron-family palette (deep saffron-orange ~#E89638),
 > warm-charcoal dark surround (never pure black — slight saffron tint),
 > cream-lantern light surround (never pure white). Southeast-Asian-evocative
-> without being literal. Playful but smart, generous, confident.
-> **Never:** enterprise-SaaS chrome, LMS / classroom imagery, brainrot-TikTok
-> cues, cartoon mascots, neon, gradient text, drop shadows. Mobile-first,
-> flat, geometric, modern.
+> without being literal. Playful but smart, generous, confident. **Never:**
+> enterprise-SaaS chrome, LMS / classroom imagery, brainrot-TikTok cues, cartoon
+> mascots, neon, gradient text, drop shadows. Mobile-first, flat, geometric,
+> modern.
 
 If you change the saffron hex in Part 1, edit it here too before generating.
 
@@ -33,19 +32,19 @@ If you change the saffron hex in Part 1, edit it here too before generating.
 
 Pick one. I'll write it into `global.css` as a Tailwind theme token.
 
-| Pick | Hex (approx) | OKLCH | Vibe |
-|---|---|---|---|
-| **Saffron Lantern** *(default)* | `#E89638` | `oklch(70% 0.16 65)` | Warm, edible, SEA-native — the warung lamp |
-| **Spiced Marigold** | `#F2A218` | `oklch(75% 0.17 75)` | Brighter, more golden, daytime-leaning |
-| **Burnt Saffron** | `#C97532` | `oklch(62% 0.14 55)` | Deeper, more oxidized, evening-leaning |
+| Pick                            | Hex (approx) | OKLCH                | Vibe                                       |
+| ------------------------------- | ------------ | -------------------- | ------------------------------------------ |
+| **Saffron Lantern** _(default)_ | `#E89638`    | `oklch(70% 0.16 65)` | Warm, edible, SEA-native — the warung lamp |
+| **Spiced Marigold**             | `#F2A218`    | `oklch(75% 0.17 75)` | Brighter, more golden, daytime-leaning     |
+| **Burnt Saffron**               | `#C97532`    | `oklch(62% 0.14 55)` | Deeper, more oxidized, evening-leaning     |
 
-Tip: ask your image-gen AI to render a 3-up swatch comparison on a phone mock
-to compare in context.
+Tip: ask your image-gen AI to render a 3-up swatch comparison on a phone mock to
+compare in context.
 
 ### 1.2 Charcoal warung (dark surround)
 
-Default: `#14110D` / `oklch(15% 0.005 65)` — slight saffron tint, not
-gunmetal. Confirm or replace.
+Default: `#14110D` / `oklch(15% 0.005 65)` — slight saffron tint, not gunmetal.
+Confirm or replace.
 
 ### 1.3 Cream lantern (light surround)
 
@@ -57,12 +56,12 @@ Confirm or replace.
 Pick one. All are Bahasa Indonesia-friendly (full Latin Extended, Vietnamese,
 likely Thai — verify diacritics on the family page before committing).
 
-| Family | Free? | Variable? | Note |
-|---|---|---|---|
-| **Geist Sans** (Vercel) | Yes (OFL) | Yes | Default. Modern, neutral, multilingual. |
-| **General Sans** (Indian Type Foundry) | Yes (Fontshare) | Yes | Slightly warmer, humanist edge. |
-| **Satoshi** (Indian Type Foundry) | Yes (Fontshare) | Yes | More characterful, geometric. |
-| **Aeonik** (CoType) | Paid | Yes | Distinctive but per-platform license. |
+| Family                                 | Free?           | Variable? | Note                                    |
+| -------------------------------------- | --------------- | --------- | --------------------------------------- |
+| **Geist Sans** (Vercel)                | Yes (OFL)       | Yes       | Default. Modern, neutral, multilingual. |
+| **General Sans** (Indian Type Foundry) | Yes (Fontshare) | Yes       | Slightly warmer, humanist edge.         |
+| **Satoshi** (Indian Type Foundry)      | Yes (Fontshare) | Yes       | More characterful, geometric.           |
+| **Aeonik** (CoType)                    | Paid            | Yes       | Distinctive but per-platform license.   |
 
 ### 1.5 Launch categories
 
@@ -84,20 +83,20 @@ Edit, reorder, or replace.
 
 ### 1.6 Logo / wordmark
 
-- **A. Type-only mark for v0** *(recommended).* "Skoop" set in your chosen
-  geometric sans, Bold weight, slightly tightened, in saffron. I render this
-  in code. **No image generation needed.**
-- **B. Logomark + wordmark.** A drawn lantern symbol next to the wordmark.
-  Defer to v0.5 unless you want it now.
+- **A. Type-only mark for v0** _(recommended)._ "Skoop" set in your chosen
+  geometric sans, Bold weight, slightly tightened, in saffron. I render this in
+  code. **No image generation needed.**
+- **B. Logomark + wordmark.** A drawn lantern symbol next to the wordmark. Defer
+  to v0.5 unless you want it now.
 
-If A: nothing to do here — confirm the choice.
-If B: tell me, and I'll add a logomark prompt to Part 2.
+If A: nothing to do here — confirm the choice. If B: tell me, and I'll add a
+logomark prompt to Part 2.
 
 ### 1.7 App tagline
 
 Used on splash, store listing, onboarding hero.
 
-Suggested: ***"Belajar dalam 90 detik."*** (Learn in 90 seconds.)
+Suggested: **_"Belajar dalam 90 detik."_** (Learn in 90 seconds.)
 
 Confirm or edit.
 
@@ -105,14 +104,14 @@ Confirm or edit.
 
 Currently still on Expo template defaults — needs your call:
 
-| Field | Current | Should be |
-|---|---|---|
-| `expo.name` | `"native"` | `"Skoop"` |
-| `expo.slug` | `"native"` | `"skoop"` |
-| `expo.scheme` | `"native"` | `"skoop"` |
-| `expo.android.adaptiveIcon.backgroundColor` | `"#E6F4FE"` (React-blue) | charcoal warung or saffron — your call |
-| `expo.plugins[expo-splash-screen].backgroundColor` | `"#ffffff"` | cream lantern (`#FAF6EE`) |
-| `expo.plugins[expo-splash-screen].dark.backgroundColor` | `"#000000"` | charcoal warung (`#14110D`) |
+| Field                                                   | Current                  | Should be                              |
+| ------------------------------------------------------- | ------------------------ | -------------------------------------- |
+| `expo.name`                                             | `"native"`               | `"Skoop"`                              |
+| `expo.slug`                                             | `"native"`               | `"skoop"`                              |
+| `expo.scheme`                                           | `"native"`               | `"skoop"`                              |
+| `expo.android.adaptiveIcon.backgroundColor`             | `"#E6F4FE"` (React-blue) | charcoal warung or saffron — your call |
+| `expo.plugins[expo-splash-screen].backgroundColor`      | `"#ffffff"`              | cream lantern (`#FAF6EE`)              |
+| `expo.plugins[expo-splash-screen].dark.backgroundColor` | `"#000000"`              | charcoal warung (`#14110D`)            |
 
 ---
 
@@ -121,7 +120,7 @@ Currently still on Expo template defaults — needs your call:
 Priority order: A → B are blocking for a real-feeling MVP. C uses an icon
 library, no generation. D–F are nice-to-have for v0.
 
-### 2.A App icon  *(highest priority)*
+### 2.A App icon _(highest priority)_
 
 **Where it lives:** Home screen. The single most important brand surface.
 **Specs:** 1024×1024 PNG, full bleed (OS rounds corners — no inner padding).
@@ -138,104 +137,103 @@ library, no generation. D–F are nice-to-have for v0.
 
 **Prompt (paste with the Style Anchor prefixed):**
 
-> [Style Anchor] App icon for **Skoop**, a short-form educational video app.
-> A simple, abstract **warung lantern** symbol — a small pendant lamp with a
+> [Style Anchor] App icon for **Skoop**, a short-form educational video app. A
+> simple, abstract **warung lantern** symbol — a small pendant lamp with a
 > single warm-saffron flame inside a geometric outline — centered on a deep
 > warm-charcoal background. Single-line construction, flat, no gradients, no
-> shadows, no text. Iconic and confident at 60×60px. **1024×1024 square,
-> full bleed.** Inspired by Apple-icon craft. Modern, minimal, SEA-native.
+> shadows, no text. Iconic and confident at 60×60px. **1024×1024 square, full
+> bleed.** Inspired by Apple-icon craft. Modern, minimal, SEA-native.
 
 Then ask for variants in the same style:
 
-- *"Same icon, foreground only, transparent background, 1024×1024."*
-- *"Same icon, white silhouette only, transparent background, 1024×1024."*
-- *"Solid charcoal-warung background swatch, 1024×1024."* (or saffron — pick)
+- _"Same icon, foreground only, transparent background, 1024×1024."_
+- _"Same icon, white silhouette only, transparent background, 1024×1024."_
+- _"Solid charcoal-warung background swatch, 1024×1024."_ (or saffron — pick)
 
 ### 2.B Splash screen icon
 
-**Where it lives:** Native splash before the JS bundle loads.
-**Spec from `app.json`:** centered, `imageWidth: 200`, `resizeMode: contain`.
-So the asset itself should be a square *icon*, not full-screen art — the
-backgrounds are filled by `app.json` colors (set in Part 1.8).
-**Files:** `packages/native/assets/images/splash-icon.png` (1024×1024 PNG,
-transparent background, symbol centered with ~10% padding).
+**Where it lives:** Native splash before the JS bundle loads. **Spec from
+`app.json`:** centered, `imageWidth: 200`, `resizeMode: contain`. So the asset
+itself should be a square _icon_, not full-screen art — the backgrounds are
+filled by `app.json` colors (set in Part 1.8). **Files:**
+`packages/native/assets/images/splash-icon.png` (1024×1024 PNG, transparent
+background, symbol centered with ~10% padding).
 
 **Prompt:**
 
-> [Style Anchor] Splash-screen icon for Skoop. The same warung-lantern symbol
-> as the app icon (single saffron flame inside a geometric pendant lantern
-> outline), but rendered slightly larger and in **saffron stroke on
-> transparent background**, so it can sit over either a charcoal-warung dark
-> backdrop or a cream-lantern light backdrop. 1024×1024 PNG, ~10% padding,
-> centered. Flat, single-line, no shadows.
+> [Style Anchor] Splash-screen icon for Skoop. The same warung-lantern symbol as
+> the app icon (single saffron flame inside a geometric pendant lantern
+> outline), but rendered slightly larger and in **saffron stroke on transparent
+> background**, so it can sit over either a charcoal-warung dark backdrop or a
+> cream-lantern light backdrop. 1024×1024 PNG, ~10% padding, centered. Flat,
+> single-line, no shadows.
 
 ### 2.C Category icons
 
 **Recommendation: don't image-gen these.** Use **Lucide React Native** or
-**Phosphor Icons** (both already work cleanly with Expo). One icon per
-category, tinted saffron when active and `bright-smoke` when inactive.
+**Phosphor Icons** (both already work cleanly with Expo). One icon per category,
+tinted saffron when active and `bright-smoke` when inactive.
 
 Suggested mapping (Lucide icon names):
 
-| Category | Lucide |
-|---|---|
-| Sains | `Atom` or `Microscope` |
-| Sejarah | `Scroll` or `BookOpen` |
-| Bahasa | `Languages` or `Globe` |
-| Koding | `Code2` or `Terminal` |
-| Keuangan | `CircleDollarSign` or `TrendingUp` |
-| Seni | `Palette` |
-| Kesehatan | `HeartPulse` or `Activity` |
-| Alam | `Leaf` or `Mountain` |
+| Category  | Lucide                             |
+| --------- | ---------------------------------- |
+| Sains     | `Atom` or `Microscope`             |
+| Sejarah   | `Scroll` or `BookOpen`             |
+| Bahasa    | `Languages` or `Globe`             |
+| Koding    | `Code2` or `Terminal`              |
+| Keuangan  | `CircleDollarSign` or `TrendingUp` |
+| Seni      | `Palette`                          |
+| Kesehatan | `HeartPulse` or `Activity`         |
+| Alam      | `Leaf` or `Mountain`               |
 
 I'll wire these in code. **Nothing for you to do** unless you'd rather have
 custom illustrated category icons (then tell me and I'll add prompts here).
 
-### 2.D Onboarding illustrations *(optional for v0)*
+### 2.D Onboarding illustrations _(optional for v0)_
 
 Three frames, one per onboarding screen.
 
-**Specs:** 1242×1600 PNG, transparent background, illustration occupies
-~80% of the canvas, designed to sit above body copy.
+**Specs:** 1242×1600 PNG, transparent background, illustration occupies ~80% of
+the canvas, designed to sit above body copy.
 
 **Prompts (use one per frame):**
 
 > [Style Anchor] Onboarding illustration #1 for Skoop. **Concept: "swap the
-> scroll."** A stylized phone in vertical orientation. Coming out of the
-> screen: small floating glyphs of knowledge — a science atom, a Bahasa
-> letter, a coin, a paintbrush — drifting upward like sparks from a warung
-> lantern. Single-line geometric style, saffron and warm-charcoal, on
-> transparent background. Flat, no gradients, no shadows. 1242×1600 PNG.
+> scroll."** A stylized phone in vertical orientation. Coming out of the screen:
+> small floating glyphs of knowledge — a science atom, a Bahasa letter, a coin,
+> a paintbrush — drifting upward like sparks from a warung lantern. Single-line
+> geometric style, saffron and warm-charcoal, on transparent background. Flat,
+> no gradients, no shadows. 1242×1600 PNG.
 
 > [Style Anchor] Onboarding illustration #2 for Skoop. **Concept: "90-second
-> takeaway."** A phone in mid-swipe (slight motion lines), with a small
-> saffron timer arc indicating ~90s. Around it, three small lesson "bites" —
-> tiny rectangles labeled with category symbols — clustered like food
-> portions on a warung tray. Geometric, flat, single-line, saffron + warm
-> charcoal on transparent background. 1242×1600 PNG.
+> takeaway."** A phone in mid-swipe (slight motion lines), with a small saffron
+> timer arc indicating ~90s. Around it, three small lesson "bites" — tiny
+> rectangles labeled with category symbols — clustered like food portions on a
+> warung tray. Geometric, flat, single-line, saffron + warm charcoal on
+> transparent background. 1242×1600 PNG.
 
-> [Style Anchor] Onboarding illustration #3 for Skoop. **Concept: "your
-> feed, your warung."** A small lantern hanging at center; below it, a
-> stylized stream of vertical video cards descending like a feed. The
-> lantern's glow tints the nearest cards saffron, the rest fade to warm
-> charcoal. Flat, geometric, single-line. 1242×1600 PNG, transparent
-> background.
+> [Style Anchor] Onboarding illustration #3 for Skoop. **Concept: "your feed,
+> your warung."** A small lantern hanging at center; below it, a stylized stream
+> of vertical video cards descending like a feed. The lantern's glow tints the
+> nearest cards saffron, the rest fade to warm charcoal. Flat, geometric,
+> single-line. 1242×1600 PNG, transparent background.
 
-### 2.E Empty-state illustrations *(optional for v0)*
+### 2.E Empty-state illustrations _(optional for v0)_
 
 Two minimum: empty library, no internet. Each ~800×800 PNG, transparent
 background.
 
-> [Style Anchor] Empty-state illustration: **"empty library."** A small
-> warung lantern, unlit, line-drawing only. A single saffron spark hovering
-> just above it, suggesting the first save. Flat, geometric, transparent
-> background, 800×800 PNG.
+> [Style Anchor] Empty-state illustration: **"empty library."** A small warung
+> lantern, unlit, line-drawing only. A single saffron spark hovering just above
+> it, suggesting the first save. Flat, geometric, transparent background,
+> 800×800 PNG.
 
-> [Style Anchor] Empty-state illustration: **"no internet."** A warung
-> lantern with its cord disconnected, drifting slightly. Single-line,
-> geometric, saffron + warm charcoal, transparent 800×800 PNG.
+> [Style Anchor] Empty-state illustration: **"no internet."** A warung lantern
+> with its cord disconnected, drifting slightly. Single-line, geometric,
+> saffron + warm charcoal, transparent 800×800 PNG.
 
-### 2.F Placeholder thumbnails & avatars *(no generation needed)*
+### 2.F Placeholder thumbnails & avatars _(no generation needed)_
 
 For dev-only mocks while real content is absent:
 
@@ -258,13 +256,13 @@ Order of operations once Part 1 decisions and Part 2.A + 2.B assets land:
 2. Update `packages/native/app.json` per Part 1.8 (name, slug, scheme,
    adaptive-icon background, splash backgrounds).
 3. Drop your generated icon files into the paths in Part 2.A and 2.B.
-4. Replace `index.tsx`'s placeholder `StyleSheet.create` colors with
-   Tailwind classes (`bg-charcoal-warung`, `text-cream-lantern`, etc.).
+4. Replace `index.tsx`'s placeholder `StyleSheet.create` colors with Tailwind
+   classes (`bg-charcoal-warung`, `text-cream-lantern`, etc.).
 5. Wire Lucide category icons + the launch category list into a real
    bottom-tab + category-strip component.
-6. Re-run `/impeccable document` once the above components exist — that
-   pass populates `DESIGN.md`'s Components section and writes the live-panel
-   sidecar with real button/card/input snippets.
+6. Re-run `/impeccable document` once the above components exist — that pass
+   populates `DESIGN.md`'s Components section and writes the live-panel sidecar
+   with real button/card/input snippets.
 
 ---
 

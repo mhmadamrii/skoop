@@ -26,22 +26,22 @@
 ## Styling (Uniwind + Tailwind v4)
 
 - Wire-up: `packages/native/metro.config.js` calls `withUniwindConfig` reading
-  `./global.css`, which is the Tailwind v4 entry (`@import 'tailwindcss';
-  @import 'uniwind';`). Generated types land in `uniwind-types.d.ts`.
+  `./global.css`, which is the Tailwind v4 entry
+  (`@import 'tailwindcss'; @import 'uniwind';`). Generated types land in
+  `uniwind-types.d.ts`.
 - Tokens: Tailwind v4 is CSS-first. Define brand tokens (saffron, charcoal
-  warung, cream lantern) in `packages/native/global.css` under `@theme`, not
-  in a JS config. Add new tokens there.
+  warung, cream lantern) in `packages/native/global.css` under `@theme`, not in
+  a JS config. Add new tokens there.
 - Defaults: write `className="..."` first. Drop to `style={...}` only when
-  Uniwind can't express something (rare — animated values, platform-only
-  props).
+  Uniwind can't express something (rare — animated values, platform-only props).
 - Anti-pattern: `StyleSheet.create` blocks in new code. Prefer Tailwind
   utilities; the Warung-Lantern token names should appear by name
   (`bg-charcoal-warung`, `text-saffron-500`), not as raw hex.
 
 ## Design Context
 
-Read these before any UI work. They are the source of truth for product
-strategy and visual system; never override them silently.
+Read these before any UI work. They are the source of truth for product strategy
+and visual system; never override them silently.
 
 - `PRODUCT.md` (root): register, users (SEA-first, Indonesia leading), product
   purpose (TikTok mechanics, educational payload), brand personality,
@@ -52,6 +52,6 @@ strategy and visual system; never override them silently.
   OS-driven theme, flat chrome with scrims only over video. Re-run
   `/impeccable document` once real tokens and components exist.
 
-Anti-references to enforce in every UI change: no enterprise-SaaS chrome, no
-LMS course-platform energy, no brainrot TikTok cues. No `#000` / `#fff` —
-every neutral is saffron-tinted.
+Anti-references to enforce in every UI change: no enterprise-SaaS chrome, no LMS
+course-platform energy, no brainrot TikTok cues. No `#000` / `#fff` — every
+neutral is saffron-tinted.
