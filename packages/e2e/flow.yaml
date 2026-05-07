@@ -1,0 +1,7 @@
+appId: com.skoop.app
+---
+- launchApp
+- assertVisible: "Skoop"
+- swipe:
+    direction: UP
+- assertVisible: "Next Lesson"

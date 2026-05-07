@@ -1,0 +1,17 @@
+{
+  "name": "skoop-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test:e2e": "pnpm -F @skoop/e2e test"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.3",
+    "turbo": "^2.0.4",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "pnpm@9.1.0"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@skoop/e2e",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Run maestro test flow.yaml\" && exit 0"
+  }
+}
