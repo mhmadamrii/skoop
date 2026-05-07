@@ -18,8 +18,25 @@
 
 - Package Manager: `pnpm`
 - Orchestration: `Turbo`
-- Mobile: `Expo` (Router, SDK 51)
+- Mobile: `Expo` (Router, SDK 54, new architecture, React 19, RN 0.81)
 - Shared: `TypeScript`
+- Styling: **Uniwind** — Tailwind CSS v4 binding for React Native. Style with
+  `className="..."`, not `StyleSheet.create`.
+
+## Styling (Uniwind + Tailwind v4)
+
+- Wire-up: `packages/native/metro.config.js` calls `withUniwindConfig` reading
+  `./global.css`, which is the Tailwind v4 entry (`@import 'tailwindcss';
+  @import 'uniwind';`). Generated types land in `uniwind-types.d.ts`.
+- Tokens: Tailwind v4 is CSS-first. Define brand tokens (saffron, charcoal
+  warung, cream lantern) in `packages/native/global.css` under `@theme`, not
+  in a JS config. Add new tokens there.
+- Defaults: write `className="..."` first. Drop to `style={...}` only when
+  Uniwind can't express something (rare — animated values, platform-only
+  props).
+- Anti-pattern: `StyleSheet.create` blocks in new code. Prefer Tailwind
+  utilities; the Warung-Lantern token names should appear by name
+  (`bg-charcoal-warung`, `text-saffron-500`), not as raw hex.
 
 ## Design Context
 
