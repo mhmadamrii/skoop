@@ -1,0 +1,9 @@
+{
+  "name": "@skoop/www",
+  "main": "expo-router/entry",
+  "version": "1.0.0",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "private": true
+}
