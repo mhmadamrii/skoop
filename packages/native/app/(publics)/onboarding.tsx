@@ -1,128 +1,114 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-import {
-  Dimensions,
-  FlatList,
-  Pressable,
-  Text,
-  View,
-  type NativeScrollEvent,
-  type NativeSyntheticEvent,
-} from 'react-native';
-
-const { width: SCREEN_W } = Dimensions.get('window');
-
-type Panel = {
+type Category = {
+  id: string;
+  label: string;
   icon: React.ComponentProps<typeof Ionicons>['name'];
-  title: string;
-  body: string;
 };
 
-const PANELS: Panel[] = [
-  {
-    icon: 'play-circle',
-    title: 'Belajar dalam 90 detik.',
-    body: 'Setiap geseran satu pelajaran. Kecil, tajam, gampang diingat.',
-  },
-  {
-    icon: 'flash',
-    title: 'Geser, dan makin pintar.',
-    body: 'Algoritma kami belajar dari apa yang kamu pelajari — bukan cuma yang kamu tonton.',
-  },
-  {
-    icon: 'compass',
-    title: 'Topik kamu, di tangan kamu.',
-    body: 'Sains, sejarah, koding, finansial, seni — dari kreator yang bikin belajar terasa seru.',
-  },
+const CATEGORIES: Category[] = [
+  { id: 'sains', label: 'Sains', icon: 'flask' },
+  { id: 'sejarah', label: 'Sejarah', icon: 'hourglass' },
+  { id: 'koding', label: 'Koding', icon: 'code-slash' },
+  { id: 'finansial', label: 'Finansial', icon: 'cash' },
+  { id: 'bahasa', label: 'Bahasa', icon: 'language' },
+  { id: 'seni', label: 'Seni', icon: 'color-palette' },
+  { id: 'kesehatan', label: 'Kesehatan', icon: 'fitness' },
+  { id: 'bisnis', label: 'Bisnis', icon: 'briefcase' },
 ];
 
-export default function Onboarding() {
-  const listRef = useRef<FlatList<Panel>>(null);
-  const router = useRouter();
-  const [index, setIndex] = useState(0);
-  const isLast = index === PANELS.length - 1;
+const MIN_PICK = 3;
 
-  const onMomentumEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const next = Math.round(e.nativeEvent.contentOffset.x / SCREEN_W);
-    if (next !== index) setIndex(next);
+export default function Onboarding() {
+  const router = useRouter();
+  const [picked, setPicked] = useState<Set<string>>(new Set());
+
+  const toggle = (id: string) => {
+    setPicked((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   };
+
+  const canContinue = picked.size >= MIN_PICK;
 
   const advance = () => {
-    if (isLast) {
-      router.replace('/(publics)/auth');
-      return;
-    }
-    listRef.current?.scrollToIndex({ index: index + 1, animated: true });
+    if (!canContinue) return;
+    router.replace('/(publics)/auth');
   };
-
-  const skip = () => router.replace('/(publics)/auth');
 
   return (
     <View className='flex-1 bg-charcoal-warung'>
       <StatusBar style='light' />
 
-      <SafeAreaView edges={['top']}>
-        <View className='flex-row justify-end px-6 pt-2'>
-          <Pressable hitSlop={12} onPress={skip}>
-            <Text className='font-sans text-base text-bright-smoke'>
-              Lewati
-            </Text>
-          </Pressable>
-        </View>
+      <SafeAreaView edges={['top']} style={{ flex: 1 }}>
+        <ScrollView
+          contentContainerStyle={{
+            paddingHorizontal: 24,
+            paddingTop: 16,
+            paddingBottom: 32,
+          }}
+          showsVerticalScrollIndicator={false}
+        >
+          <Text className='font-sans text-3xl font-bold leading-tight text-cream-lantern'>
+            Pilih topik favoritmu
+          </Text>
+          <Text className='mt-2 font-sans text-sm text-bright-smoke'>
+            Minimal {MIN_PICK} — biar feed langsung pintar.
+          </Text>
+
+          <View className='mt-6 flex-row flex-wrap gap-3'>
+            {CATEGORIES.map((c) => {
+              const isPicked = picked.has(c.id);
+              return (
+                <Pressable
+                  key={c.id}
+                  onPress={() => toggle(c.id)}
+                  style={({ pressed }) => ({
+                    width: '48%',
+                    opacity: pressed ? 0.85 : 1,
+                  })}
+                  className={
+                    'h-28 justify-between rounded-2xl border p-4 ' +
+                    (isPicked
+                      ? 'border-saffron-500 bg-saffron-500/10'
+                      : 'border-transparent bg-charcoal-warung-raised')
+                  }
+                >
+                  <Ionicons
+                    name={c.icon}
+                    size={28}
+                    color={isPicked ? '#E89638' : '#B8AE9D'}
+                  />
+                  <Text className='font-sans text-base font-semibold text-cream-lantern'>
+                    {c.label}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </ScrollView>
       </SafeAreaView>
 
-      <FlatList
-        ref={listRef}
-        data={PANELS}
-        keyExtractor={(p) => p.title}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onMomentumScrollEnd={onMomentumEnd}
-        renderItem={({ item }) => (
-          <View
-            style={{ width: SCREEN_W }}
-            className='flex-1 items-center justify-center px-10'
-          >
-            <View className='mb-12 h-44 w-44 items-center justify-center rounded-full bg-charcoal-warung-raised'>
-              <Ionicons name={item.icon} size={96} color='#E89638' />
-            </View>
-            <Text className='text-center font-sans text-3xl font-bold leading-tight text-cream-lantern'>
-              {item.title}
-            </Text>
-            <Text className='mt-4 text-center font-sans text-base leading-relaxed text-bright-smoke'>
-              {item.body}
-            </Text>
-          </View>
-        )}
-      />
-
       <SafeAreaView edges={['bottom']}>
-        <View className='px-8 pb-2'>
-          <View className='mb-8 flex-row items-center justify-center gap-2'>
-            {PANELS.map((_, i) => (
-              <View
-                key={i}
-                className={
-                  i === index
-                    ? 'h-2 w-6 rounded-full bg-saffron-500'
-                    : 'h-2 w-2 rounded-full bg-dim-smoke'
-                }
-              />
-            ))}
-          </View>
-
+        <View className='px-8 pb-2 pt-3'>
           <Pressable
+            disabled={!canContinue}
             onPress={advance}
-            style={({ pressed }) => ({ opacity: pressed ? 0.85 : 1 })}
+            style={({ pressed }) => ({
+              opacity: !canContinue ? 0.5 : pressed ? 0.85 : 1,
+            })}
             className='h-14 items-center justify-center rounded-2xl bg-saffron-500'
           >
             <Text className='font-sans text-lg font-semibold text-charcoal-warung'>
-              {isLast ? 'Mulai' : 'Lanjut'}
+              Lanjut ({picked.size}/{MIN_PICK})
             </Text>
           </Pressable>
         </View>

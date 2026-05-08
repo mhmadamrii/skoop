@@ -7,12 +7,6 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <Stack>
         <Stack.Screen
-          name='index'
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name='(publics)'
           options={{
             headerShown: false,

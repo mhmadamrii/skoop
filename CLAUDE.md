@@ -34,6 +34,26 @@
   a JS config. Add new tokens there.
 - Defaults: write `className="..."` first. Drop to `style={...}` only when
   Uniwind can't express something (rare — animated values, platform-only props).
+- **Third-party components require `withUniwind()`.** `className` only works
+  out of the box on RN core components (`View`, `Text`, `Pressable`,
+  `ScrollView`, etc.). For imported components like `SafeAreaView` from
+  `react-native-safe-area-context`, `BottomSheet`, `LinearGradient`, etc.,
+  passing `className` is silently dropped — no styles apply. Wrap once and
+  reuse:
+
+  ```tsx
+  import { withUniwind } from 'uniwind';
+  import { SafeAreaView } from 'react-native-safe-area-context';
+
+  const StyledSafeAreaView = withUniwind(SafeAreaView);
+
+  // ✅ works
+  <StyledSafeAreaView className='flex-1 bg-charcoal-warung' />
+  ```
+
+  For a single one-off prop (e.g. `flex: 1`), `style={{ ... }}` on the raw
+  component is fine. Never pass `className` to a raw third-party component
+  and assume it works.
 - Anti-pattern: `StyleSheet.create` blocks in new code. Prefer Tailwind
   utilities; the Warung-Lantern token names should appear by name
   (`bg-charcoal-warung`, `text-saffron-500`), not as raw hex.

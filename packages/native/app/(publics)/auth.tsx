@@ -12,7 +12,7 @@ export default function Auth() {
     <View className='flex-1 bg-charcoal-warung'>
       <StatusBar style='light' />
 
-      <SafeAreaView edges={['top', 'bottom']} className='flex-1'>
+      <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1 }}>
         <View className='flex-1 justify-between px-8 py-4'>
           <View className='mt-12 items-center'>
             <View className='mb-6 h-16 w-16 items-center justify-center rounded-full bg-saffron-500'>
