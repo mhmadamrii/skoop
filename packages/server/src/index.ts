@@ -1,7 +1,6 @@
 import { createContext } from '@skoop/api/context';
 import { appRouter } from '@skoop/api/routers/index';
 import { auth } from '@skoop/auth';
-import { env } from '@skoop/env/server';
 import { trpcServer } from '@hono/trpc-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
@@ -13,7 +12,7 @@ app.use(logger());
 app.use(
   '/*',
   cors({
-    origin: env.CORS_ORIGIN,
+    origin: 'http://localhost:3001',
     allowMethods: ['GET', 'POST', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
     credentials: true,

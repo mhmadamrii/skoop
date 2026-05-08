@@ -1,0 +1,3 @@
+{
+  "extends": "@skoop/config/tsconfig.base.json"
+}

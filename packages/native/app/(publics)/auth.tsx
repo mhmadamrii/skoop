@@ -1,17 +1,33 @@
+import { useRef, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import type { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { AuthSheet } from '@/components/auth-sheet';
+
+type AuthButtonProps = {
+  label: string;
+  icon: React.ReactNode;
+  onPress: () => void;
+};
 
 export default function Auth() {
   const router = useRouter();
+  const sheetRef = useRef<BottomSheetModal>(null);
+  const [sheetMode, setSheetMode] = useState<'signin' | 'signup'>('signin');
+
   const enter = () => router.replace('/(tabs)/feed');
+
+  const openSheet = (mode: 'signin' | 'signup') => {
+    setSheetMode(mode);
+    sheetRef.current?.present();
+  };
 
   return (
     <View className='flex-1 bg-charcoal-warung'>
       <StatusBar style='light' />
-
       <SafeAreaView edges={['top', 'bottom']} style={{ flex: 1 }}>
         <View className='flex-1 justify-between px-8 py-4'>
           <View className='mt-12 items-center'>
@@ -44,13 +60,24 @@ export default function Auth() {
             <AuthButton
               label='Lanjut dengan Email'
               icon={<Ionicons name='mail' size={22} color='#FAF6EE' />}
-              onPress={enter}
+              onPress={() => openSheet('signin')}
             />
+
+            <Pressable
+              onPress={() => openSheet('signup')}
+              hitSlop={12}
+              className='items-center py-2'
+            >
+              <Text className='font-sans text-sm text-bright-smoke'>
+                Belum punya akun?{' '}
+                <Text className='font-semibold text-saffron-500'>Daftar</Text>
+              </Text>
+            </Pressable>
 
             <Pressable
               onPress={enter}
               hitSlop={12}
-              className='items-center py-4'
+              className='items-center py-2'
             >
               <Text className='font-sans text-base font-semibold text-saffron-500'>
                 Lanjutkan tanpa akun
@@ -65,15 +92,19 @@ export default function Auth() {
           </Text>
         </View>
       </SafeAreaView>
+
+      <AuthSheet
+        ref={sheetRef}
+        initialMode={sheetMode}
+        key={sheetMode}
+        onSubmit={() => {
+          sheetRef.current?.dismiss();
+          enter();
+        }}
+      />
     </View>
   );
 }
-
-type AuthButtonProps = {
-  label: string;
-  icon: React.ReactNode;
-  onPress: () => void;
-};
 
 function AuthButton({ label, icon, onPress }: AuthButtonProps) {
   return (

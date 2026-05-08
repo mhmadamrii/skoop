@@ -149,6 +149,31 @@ importers:
 
   packages/e2e: {}
 
+  packages/env:
+    dependencies:
+      '@t3-oss/env-core':
+        specifier: ^0.13.1
+        version: 0.13.11(typescript@6.0.3)(valibot@1.2.0(typescript@6.0.3))(zod@4.4.3)
+      '@t3-oss/env-nextjs':
+        specifier: ^0.13.1
+        version: 0.13.11(typescript@6.0.3)(valibot@1.2.0(typescript@6.0.3))(zod@4.4.3)
+      dotenv:
+        specifier: 'catalog:'
+        version: 17.4.2
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
+    devDependencies:
+      '@skoop/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^22.13.14
+        version: 22.19.18
+      typescript:
+        specifier: ^6
+        version: 6.0.3
+
   packages/native:
     dependencies:
       '@better-auth/expo':
@@ -2159,6 +2184,40 @@ packages:
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
+  '@t3-oss/env-core@0.13.11':
+    resolution: {integrity: sha512-sM7GYY+KL7H/Hl0BE0inWfk3nRHZOLhmVn7sHGxaZt9FAR6KqREXAE+6TqKfiavfXmpRxO/OZ2QgKRd+oiBYRQ==}
+    peerDependencies:
+      arktype: ^2.1.0
+      typescript: '>=5.0.0'
+      valibot: ^1.0.0-beta.7 || ^1.0.0
+      zod: ^3.24.0 || ^4.0.0
+    peerDependenciesMeta:
+      arktype:
+        optional: true
+      typescript:
+        optional: true
+      valibot:
+        optional: true
+      zod:
+        optional: true
+
+  '@t3-oss/env-nextjs@0.13.11':
+    resolution: {integrity: sha512-NC+3j7YWgpzdFu1t5y/8wqibTK0lm5RS4bjXA1n8uwik3wIR4iZM4Fa+U2BaMa5k3Qk8RZiYhoAIX0WogmGkzg==}
+    peerDependencies:
+      arktype: ^2.1.0
+      typescript: '>=5.0.0'
+      valibot: ^1.0.0-beta.7 || ^1.0.0
+      zod: ^3.24.0 || ^4.0.0
+    peerDependenciesMeta:
+      arktype:
+        optional: true
+      typescript:
+        optional: true
+      valibot:
+        optional: true
+      zod:
+        optional: true
 
   '@tailwindcss/node@4.2.1':
     resolution: {integrity: sha512-jlx6sLk4EOwO6hHe1oCGm1Q4AN/s0rSrTTPBGPM0/RQ6Uylwq17FuU8IeJJKEjtc6K6O07zsvP+gDO6MMWo7pg==}
@@ -8648,6 +8707,20 @@ snapshots:
       '@sinonjs/commons': 3.0.1
 
   '@standard-schema/spec@1.1.0': {}
+
+  '@t3-oss/env-core@0.13.11(typescript@6.0.3)(valibot@1.2.0(typescript@6.0.3))(zod@4.4.3)':
+    optionalDependencies:
+      typescript: 6.0.3
+      valibot: 1.2.0(typescript@6.0.3)
+      zod: 4.4.3
+
+  '@t3-oss/env-nextjs@0.13.11(typescript@6.0.3)(valibot@1.2.0(typescript@6.0.3))(zod@4.4.3)':
+    dependencies:
+      '@t3-oss/env-core': 0.13.11(typescript@6.0.3)(valibot@1.2.0(typescript@6.0.3))(zod@4.4.3)
+    optionalDependencies:
+      typescript: 6.0.3
+      valibot: 1.2.0(typescript@6.0.3)
+      zod: 4.4.3
 
   '@tailwindcss/node@4.2.1':
     dependencies:

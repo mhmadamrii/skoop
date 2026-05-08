@@ -13,6 +13,8 @@ import {
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import { trpc } from '@/utils/trpc';
 
 const { width: SCREEN_W } = Dimensions.get('window');
 
@@ -60,6 +62,8 @@ export default function Index() {
   };
 
   const skip = () => router.replace('/(publics)/auth');
+
+  console.log('health: ', useQuery(trpc.healthCheck.queryOptions()));
 
   return (
     <View className='flex-1 bg-charcoal-warung'>
