@@ -58,6 +58,15 @@
   utilities; the Warung-Lantern token names should appear by name
   (`bg-charcoal-warung`, `text-saffron-500`), not as raw hex.
 
+## UI Components
+
+- **HeroUI Native** (`heroui-native`) is the component library for this app.
+  Docs: https://heroui.com/docs/native/components. Reach for a HeroUI component
+  before building one from scratch — buttons, inputs, sheets, cards, etc. should
+  come from the library so the visual system stays consistent.
+- HeroUI components are third-party, so `className` is silently dropped on them.
+  Wrap with `withUniwind()` once and reuse, per the Uniwind rules above.
+
 ## Assets
 
 - **Placeholder image:** when a screen calls for an image (creator avatar,

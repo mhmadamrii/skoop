@@ -4,3 +4,7 @@ build
 coverage
 *.log
 *.tsbuildinfo
+.env
+.expo
+.next
+.turbo

@@ -1,10 +1,15 @@
 import { Stack } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { queryClient } from '@/utils/trpc';
+import { HeroUINativeProvider } from 'heroui-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
+import { QueryClientProvider } from '@tanstack/react-query';
 import '../global.css';
 
-export default function RootLayout() {
+function StackLayout() {
   return (
-    <SafeAreaProvider>
+    <>
       <Stack>
         <Stack.Screen
           name='(publics)'
@@ -25,6 +30,22 @@ export default function RootLayout() {
           }}
         />
       </Stack>
+    </>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <SafeAreaProvider>
+      <QueryClientProvider client={queryClient}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <KeyboardProvider>
+            <HeroUINativeProvider>
+              <StackLayout />
+            </HeroUINativeProvider>
+          </KeyboardProvider>
+        </GestureHandlerRootView>
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 }

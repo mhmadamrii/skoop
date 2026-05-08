@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import { router } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image } from 'expo-image';
+import { Ionicons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
+
 import {
   Pressable,
   ScrollView,
@@ -6,10 +12,6 @@ import {
   View,
   useWindowDimensions,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Image } from 'expo-image';
-import { Ionicons } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
 
 const AVATAR = require('../../assets/images/placeholder.png');
 const THUMB = require('../../assets/images/placeholder.png');
@@ -61,6 +63,7 @@ export default function Profile() {
 
           <View className='mt-6 px-6'>
             <Pressable
+              onPress={() => router.push('/(publics)')}
               style={({ pressed }) => ({ opacity: pressed ? 0.85 : 1 })}
               className='h-14 items-center justify-center rounded-2xl bg-saffron-500'
             >

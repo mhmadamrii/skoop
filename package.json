@@ -10,12 +10,20 @@
     "dev:native": "turbo -F @skoop/native dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test:e2e": "pnpm -F @skoop/e2e test"
+    "test:e2e": "pnpm -F @skoop/e2e test",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @skoop/db db:push",
+    "db:studio": "turbo -F @skoop/db db:studio",
+    "db:generate": "turbo -F @skoop/db db:generate",
+    "db:migrate": "turbo -F @skoop/db db:migrate"
   },
   "devDependencies": {
     "prettier": "^3.8.3",
     "turbo": "^2.0.4",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@10.8.0"
+  "packageManager": "pnpm@10.8.0",
+  "dependencies": {
+    "@expo/ui": "^55.0.15"
+  }
 }
