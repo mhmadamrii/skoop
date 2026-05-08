@@ -1,6 +1,9 @@
 {
   "name": "skoop-monorepo",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -14,5 +17,5 @@
     "turbo": "^2.0.4",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@9.1.0"
+  "packageManager": "pnpm@10.8.0"
 }
