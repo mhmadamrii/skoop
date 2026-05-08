@@ -16,7 +16,9 @@
     "db:push": "turbo -F @skoop/db db:push",
     "db:studio": "turbo -F @skoop/db db:studio",
     "db:generate": "turbo -F @skoop/db db:generate",
-    "db:migrate": "turbo -F @skoop/db db:migrate"
+    "db:migrate": "turbo -F @skoop/db db:migrate",
+    "set-ip": "node ./scripts/set-ip.js",
+    "postinstall": "node ./scripts/set-ip.js"
   },
   "devDependencies": {
     "prettier": "^3.8.3",

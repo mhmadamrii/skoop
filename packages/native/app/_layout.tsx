@@ -36,6 +36,7 @@ function StackLayout() {
 }
 
 export default function RootLayout() {
+  console.log('query client', queryClient);
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
