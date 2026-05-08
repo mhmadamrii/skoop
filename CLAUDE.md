@@ -38,6 +38,17 @@
   utilities; the Warung-Lantern token names should appear by name
   (`bg-charcoal-warung`, `text-saffron-500`), not as raw hex.
 
+## Assets
+
+- **Placeholder image:** when a screen calls for an image (creator avatar,
+  lesson thumbnail, hero art) and the real asset isn't ready, use
+  `packages/native/assets/images/placeholder.png`. Don't ship raw `<View>` color
+  blocks as a stand-in — the placeholder keeps layout/aspect honest. Real
+  assets land later; just swap the `source`.
+- **Vector icons:** prefer `@expo/vector-icons` (Ionicons for UI, FontAwesome
+  for brand glyphs like Apple/Google) over raster icons. They scale, theme,
+  and don't need new asset files.
+
 ## Design Context
 
 Read these before any UI work. They are the source of truth for product strategy

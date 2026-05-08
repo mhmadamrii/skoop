@@ -1,2 +1,43 @@
 @import 'tailwindcss';
 @import 'uniwind';
+
+/* ─────────────────────────────────────────────────────────────
+ * Skoop — Warung Lantern theme tokens. Source of truth: DESIGN.md.
+ *   • No #000, no #fff. Every neutral is saffron-tinted.
+ *   • One committed saffron hue carries non-feed chrome (30–60%).
+ *   • One geometric sans across the entire app.
+ * ───────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Saffron Lantern — the committed brand hue. 500 is canonical. */
+  --color-saffron-50: #fdf5ec;
+  --color-saffron-100: #fbe8d0;
+  --color-saffron-200: #f6cc9d;
+  --color-saffron-300: #f2b16a;
+  --color-saffron-400: #ed9d4c;
+  --color-saffron-500: #e89638;
+  --color-saffron-600: #d4822a;
+  --color-saffron-700: #b36a1f;
+  --color-saffron-800: #92521a;
+  --color-saffron-900: #6f3e14;
+
+  /* Charcoal Warung — dark surround. Saffron-tinted, never #000. */
+  --color-charcoal-warung: #14110d;
+  --color-charcoal-warung-raised: #1c1813;
+  --color-charcoal-warung-deep: #0e0b08;
+
+  /* Cream Lantern — light surround. Saffron-tinted, never #fff. */
+  --color-cream-lantern: #faf6ee;
+  --color-cream-lantern-raised: #f4eee0;
+  --color-cream-lantern-deep: #ece3cf;
+
+  /* Smoke — mid-tone family for inactive chrome, dividers,
+   * secondary text. Saffron-tinted in both themes. */
+  --color-dim-smoke: #6e665a;
+  --color-bright-smoke: #b8ae9d;
+
+  /* One geometric sans for the whole app. Geist is the pick from
+   * ideas/task.md; system fallback until the font asset is wired. */
+  --font-sans:
+    'Geist', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+}
