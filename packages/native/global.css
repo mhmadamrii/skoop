@@ -1,6 +1,15 @@
 @import 'tailwindcss';
 @import 'uniwind';
 
+@import 'heroui-native/styles';
+/* Path to the heroui-native lib inside node_modules relative to global.css */
+/* Examples:
+ *   - If global.css is at project root: ./node_modules/heroui-native/lib
+ *   - If global.css is in app/: ../node_modules/heroui-native/lib
+ *   - If global.css is in src/styles/: ../../node_modules/heroui-native/lib
+ */
+@source './node_modules/heroui-native/lib';
+
 /* ─────────────────────────────────────────────────────────────
  * Skoop — Warung Lantern theme tokens. Source of truth: DESIGN.md.
  *   • No #000, no #fff. Every neutral is saffron-tinted.
@@ -38,6 +47,5 @@
 
   /* One geometric sans for the whole app. Geist is the pick from
    * ideas/task.md; system fallback until the font asset is wired. */
-  --font-sans:
-    'Geist', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-sans: 'Geist', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
 }

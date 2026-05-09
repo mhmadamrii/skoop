@@ -13,6 +13,7 @@
   "dependencies": {
     "@better-auth/expo": "catalog:",
     "@skoop/db": "workspace:*",
+    "@skoop/env": "workspace:*",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "zod": "catalog:"

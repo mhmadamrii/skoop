@@ -42,11 +42,11 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <KeyboardProvider>
-            <HeroUINativeProvider>
-              <BottomSheetModalProvider>
+            <BottomSheetModalProvider>
+              <HeroUINativeProvider>
                 <StackLayout />
-              </BottomSheetModalProvider>
-            </HeroUINativeProvider>
+              </HeroUINativeProvider>
+            </BottomSheetModalProvider>
           </KeyboardProvider>
         </GestureHandlerRootView>
       </QueryClientProvider>

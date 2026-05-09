@@ -6,6 +6,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { AuthSheet } from '@/components/auth-sheet';
+import { useToast } from 'heroui-native';
 
 type AuthButtonProps = {
   label: string;
@@ -24,7 +25,7 @@ export default function Auth() {
     setSheetMode(mode);
     sheetRef.current?.present();
   };
-
+  const { toast } = useToast();
   return (
     <View className='flex-1 bg-charcoal-warung'>
       <StatusBar style='light' />

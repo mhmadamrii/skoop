@@ -39,6 +39,7 @@ export const AuthSheet = forwardRef<BottomSheetModal, AuthSheetProps>(
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const snapPoints = useMemo(() => ['85%'], []);
 
@@ -56,46 +57,63 @@ export const AuthSheet = forwardRef<BottomSheetModal, AuthSheetProps>(
     );
 
     const submit = async () => {
-      console.log(
-        'process.env.EXPO_PUBLIC_SERVER_URL',
-        process.env.EXPO_PUBLIC_SERVER_URL,
-      );
+      setIsLoading(true);
       try {
-        const res = await authClient.signIn.email(
-          {
-            email: email.trim(),
-            password,
-          },
-          {
-            onError(error) {
-              toast.show({
-                variant: 'danger',
-                label: error.error?.message || 'Failed to sign in',
-              });
+        if (mode === 'signin') {
+          await authClient.signIn.email(
+            {
+              email: email.trim(),
+              password,
             },
-            onSuccess() {
-              toast.show({
-                variant: 'success',
-                label: 'Signed in successfully',
-              });
-              queryClient.refetchQueries();
+            {
+              onError(error) {
+                toast.show({
+                  variant: 'danger',
+                  label: error.error?.message || 'Failed to sign in',
+                });
+              },
+              onSuccess() {
+                toast.show({
+                  variant: 'success',
+                  label: 'Signed in successfully',
+                });
+                queryClient.refetchQueries();
+              },
             },
-          },
-        );
-        console.log('res', res);
+          );
+        } else {
+          await authClient.signUp.email(
+            {
+              email: email.trim(),
+              password,
+              name,
+            },
+            {
+              onError(error) {
+                console.log('error', JSON.stringify(error, null, 2));
+                toast.show({
+                  variant: 'danger',
+                  label: error.error?.message || 'Failed to sign up',
+                });
+              },
+              onSuccess() {
+                toast.show({
+                  variant: 'success',
+                  label: 'Signed up successfully',
+                });
+                queryClient.refetchQueries();
+              },
+            },
+          );
+        }
       } catch (error: any) {
-        console.log('error', error);
         toast.show({
           variant: 'danger',
-          label: error?.error?.message || 'Failed to sign in',
+          label: error?.error?.message || 'Something went wrong',
         });
+      } finally {
+        setIsLoading(false);
       }
-      // onSubmit?.({
-      //   mode,
-      //   email: email.trim(),
-      //   password,
-      //   name: mode === 'signup' ? name.trim() : undefined,
-      // });
     };
 
     const isSignin = mode === 'signin';
@@ -168,6 +186,7 @@ export const AuthSheet = forwardRef<BottomSheetModal, AuthSheetProps>(
           </View>
 
           <Pressable
+            disabled={isLoading}
             onPress={submit}
             style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
             className='mt-6 h-14 items-center justify-center rounded-2xl bg-saffron-500'

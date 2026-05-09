@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { haptics } from '@/utils/haptics';
 
 type Category = {
   id: string;
@@ -29,6 +30,7 @@ export default function Onboarding() {
   const [picked, setPicked] = useState<Set<string>>(new Set());
 
   const toggle = (id: string) => {
+    haptics.selection();
     setPicked((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
@@ -40,6 +42,7 @@ export default function Onboarding() {
   const canContinue = picked.size >= MIN_PICK;
 
   const advance = () => {
+    haptics.light();
     if (!canContinue) return;
     router.replace('/(publics)/auth');
   };

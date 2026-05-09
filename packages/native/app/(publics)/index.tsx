@@ -3,6 +3,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useQuery } from '@tanstack/react-query';
+import { trpc } from '@/utils/trpc';
+import { haptics } from '@/utils/haptics';
 
 import {
   Dimensions,
@@ -13,8 +16,6 @@ import {
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
-import { trpc } from '@/utils/trpc';
 
 const { width: SCREEN_W } = Dimensions.get('window');
 
@@ -54,6 +55,7 @@ export default function Index() {
   };
 
   const advance = () => {
+    haptics.light();
     if (isLast) {
       router.replace('/(publics)/onboarding');
       return;
@@ -63,7 +65,10 @@ export default function Index() {
 
   const skip = () => router.replace('/(publics)/auth');
 
-  console.log('health: ', useQuery(trpc.healthCheck.queryOptions()));
+  console.log(
+    'health: ',
+    JSON.stringify(useQuery(trpc.healthCheck.queryOptions()).data),
+  );
 
   return (
     <View className='flex-1 bg-charcoal-warung'>

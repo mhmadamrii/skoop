@@ -1,10 +1,10 @@
-import * as Haptics from 'expo-haptics';
-
 import { Tabs } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+
+import { haptics } from '../../utils/haptics';
 
 type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -54,10 +54,7 @@ function CustomTabBar({ state, navigation }: BottomTabBarProps) {
           const isUpload = route.name === 'upload';
 
           const onPress = () => {
-            if (process.env.EXPO_OS === 'ios') {
-              // Add a soft haptic feedback when pressing down on the tabs.
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            }
+            haptics.light();
             const event = navigation.emit({
               type: 'tabPress',
               target: route.key,

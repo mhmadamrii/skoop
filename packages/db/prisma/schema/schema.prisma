@@ -8,3 +8,140 @@ generator client {
 datasource db {
     provider = "postgresql"
 }
+
+model Creator {
+    id          String   @id @default(cuid())
+    userId      String?  @unique
+    handle      String   @unique
+    displayName String
+    bio         String?
+    avatarUrl   String?
+    verified    Boolean  @default(false)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    lessons   Lesson[]
+    followers Follow[]
+
+    @@map("creator")
+}
+
+model Category {
+    id        String   @id @default(cuid())
+    slug      String   @unique
+    name      String
+    iconKey   String?
+    createdAt DateTime @default(now())
+
+    lessons Lesson[]
+
+    @@map("category")
+}
+
+model Lesson {
+    id          String   @id @default(cuid())
+    creatorId   String
+    categoryId  String
+    title       String
+    description String
+    videoUrl    String
+    thumbUrl    String
+    duration    Int
+    publishedAt DateTime @default(now())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    creator  Creator   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+    category Category  @relation(fields: [categoryId], references: [id])
+    likes    Like[]
+    saves    Save[]
+    comments Comment[]
+    views    View[]
+
+    @@index([creatorId])
+    @@index([categoryId])
+    @@index([publishedAt])
+    @@map("lesson")
+}
+
+model Like {
+    id        String   @id @default(cuid())
+    userId    String
+    lessonId  String
+    createdAt DateTime @default(now())
+
+    lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, lessonId])
+    @@index([lessonId])
+    @@index([userId])
+    @@map("like")
+}
+
+model Save {
+    id        String   @id @default(cuid())
+    userId    String
+    lessonId  String
+    createdAt DateTime @default(now())
+
+    lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, lessonId])
+    @@index([userId])
+    @@map("save")
+}
+
+model Comment {
+    id        String   @id @default(cuid())
+    userId    String
+    lessonId  String
+    body      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+    @@index([lessonId])
+    @@index([userId])
+    @@map("comment")
+}
+
+model Follow {
+    id          String   @id @default(cuid())
+    userId      String
+    creatorId   String
+    createdAt   DateTime @default(now())
+
+    creator Creator @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, creatorId])
+    @@index([creatorId])
+    @@index([userId])
+    @@map("follow")
+}
+
+model View {
+    id           String   @id @default(cuid())
+    userId       String?
+    lessonId     String
+    watchedMs    Int      @default(0)
+    completed    Boolean  @default(false)
+    watchedAt    DateTime @default(now())
+
+    lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+    @@index([lessonId])
+    @@index([userId, watchedAt])
+    @@map("view")
+}
+
+model UserStats {
+    userId              String   @id
+    currentStreak       Int      @default(0)
+    longestStreak       Int      @default(0)
+    totalLessonsLearned Int      @default(0)
+    lastLessonAt        DateTime?
+    updatedAt           DateTime @updatedAt
+
+    @@map("user_stats")
+}

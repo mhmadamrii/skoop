@@ -1,6 +1,7 @@
 import { expo } from '@better-auth/expo';
 import { createPrismaClient } from '@skoop/db';
 import { betterAuth } from 'better-auth';
+import { env } from '@skoop/env/server';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 
 export function createAuth() {
@@ -12,14 +13,16 @@ export function createAuth() {
     }),
 
     trustedOrigins: [
-      //   env.CORS_ORIGIN,
-      'example-skoop://',
+      env.CORS_ORIGIN,
+      'skoop://',
       ...(process.env.NODE_ENV === 'development'
         ? [
             'exp://',
             'exp://**',
             'exp://192.168.*.*:*/**',
             'http://localhost:8081',
+            'http://192.168.1.194:8081',
+            'exp://192.168.1.194:8081',
           ]
         : []),
     ],
