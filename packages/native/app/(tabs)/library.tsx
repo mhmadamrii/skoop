@@ -177,11 +177,7 @@ type TabUnderlineProps = {
 
 function TabUnderline({ label, active, onPress }: TabUnderlineProps) {
   return (
-    <Pressable
-      onPress={onPress}
-      hitSlop={8}
-      className='items-center pb-3'
-    >
+    <Pressable onPress={onPress} hitSlop={8} className='items-center pb-3'>
       <Text
         className={
           'font-sans text-base font-semibold ' +

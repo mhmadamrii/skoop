@@ -23,8 +23,7 @@ COLOR PALETTE — exact hex, no substitutions:
   background and app shell.
 - Cream Lantern #FAF6EE — light surround. Saffron-tinted, never #fff.
 - Dim Smoke #6E665A — secondary text, dividers, inactive chrome (dark theme).
-- Bright Smoke #B8AE9D — secondary text, dividers (mid contrast).  
-
+- Bright Smoke #B8AE9D — secondary text, dividers (mid contrast).
 
 TYPOGRAPHY: one geometric sans for the entire app (Geist / Satoshi / General
 Sans family). No display/body split. Hierarchy via weight and scale only.
@@ -33,8 +32,7 @@ Sans family). No display/body split. Hierarchy via weight and scale only.
 - Headline Bold ~24px, line-height 1.15
 - Title Semibold ~18px
 - Body Regular ~16px, line-height 1.45
-- Label Medium ~13px tracked +0.05em  
-
+- Label Medium ~13px tracked +0.05em
 
 STYLE RULES:
 
@@ -58,8 +56,7 @@ it failed):
 - Brainrot TikTok cues: no red-dot notification spam, no fake urgency, no
   aggressive autoplay traps, no fake-engagement counters.
 - Pure #000 or #fff anywhere.
-- Mixing typefaces (no serif "for the professor side").  
-
+- Mixing typefaces (no serif "for the professor side").
 
 ---
 
@@ -72,8 +69,7 @@ filled saffron (#E89638) circle with a charcoal flame glyph inside (the warung
 lantern mark). Below: "Skoop" wordmark in bold geometric sans, ~36px, Cream
 Lantern (#FAF6EE). No tagline, no spinner, no chrome. Edge-to-edge.
 
-2. Onboarding — 3 panels, horizontal pager  
-
+2. Onboarding — 3 panels, horizontal pager
 
 Charcoal Warung full-bleed. Top right: "Lewati" link in Bright Smoke (#B8AE9D),
 14px. Center: a 176×176 circle of a slightly raised charcoal (#1C1813) with a
@@ -93,11 +89,9 @@ Generate three panels:
 - Panel 3: compass icon. Title "Topik kamu, di tangan kamu." Body "Sains,
   sejarah, koding, finansial, seni — dari kreator yang bikin belajar terasa
   seru."  
-  CTA label is "Lanjut" on panels 1–2, "Mulai" on panel 3.  
+  CTA label is "Lanjut" on panels 1–2, "Mulai" on panel 3.
 
-
-3. Auth — sign in  
-
+3. Auth — sign in
 
 Charcoal Warung full-bleed. Top section centered: 64×64 saffron-500 filled
 circle with a charcoal flame icon, then "Skoop" wordmark in bold ~40px Cream
@@ -110,14 +104,12 @@ border, transparent fill, icon + label centered):
 - Apple icon (cream tint) + "Lanjut dengan Apple"
 - Google "G" glyph + "Lanjut dengan Google"
 - Mail icon + "Lanjut dengan Email" Below the stack: a centered saffron-500 text
-  link "Lanjutkan tanpa akun".  
-
+  link "Lanjutkan tanpa akun".
 
 Footer: tiny 12px Dim Smoke text — "Dengan lanjut, kamu setuju dengan Syarat
 Layanan dan Kebijakan Privasi Skoop." — with the two policy phrases underlined.
 
-4. Interest picker (post-auth, seeds the feed)  
-
+4. Interest picker (post-auth, seeds the feed)
 
 Charcoal Warung. Header: "Pilih topik favoritmu" in 28px bold Cream Lantern;
 subhead "Minimal 3 — biar feed langsung pintar." in 14px Bright Smoke.
@@ -134,8 +126,7 @@ turns from Bright Smoke to saffron. Idle glyph is Bright Smoke.
 Bottom CTA: full-width saffron-500 button, label "Lanjut (3/8)" with live count,
 disabled state when <3 picked (Dim Smoke fill, charcoal text).
 
-5. Feed (the canonical Skoop surface)  
-
+5. Feed (the canonical Skoop surface)
 
 Full-bleed vertical video on Charcoal Warung. Edge-to-edge, no header chrome
 over video.
@@ -208,8 +199,7 @@ Bright Smoke.
 NO filters carousel. NO effects grid. NO music picker. Skoop is not a
 creator-suite clone.
 
-8. Library  
-
+8. Library
 
 Charcoal Warung. Header: "Library" in Bold 28px Cream Lantern; subhead
 "Pelajaran kamu, balik kapan saja." in 14px Bright Smoke.
@@ -287,8 +277,7 @@ How to use it
    to corrective feedback.
 4. Tweaks worth running early: try Light theme on a non-feed screen (Discover or
    Profile) to confirm the Cream Lantern surround still feels warung-warm, not
-   paper-clinical.  
-
+   paper-clinical.
 
 Want me to write this to ideas/stitch-prompts.md so you can keep refining it in
 the repo, or are you good copy-pasting from here?

@@ -33,16 +33,13 @@ export default function Profile() {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
   const avatarSource = user?.image ? { uri: user.image } : AVATAR;
-  const handle = user?.email
-    ? '@' + user.email.split('@')[0]
-    : '';
+  const handle = user?.email ? '@' + user.email.split('@')[0] : '';
 
   const { data: stats } = useQuery({
     ...trpc.profile.stats.queryOptions(),
     enabled: !!user,
   });
-  const fmt = (n: number | undefined) =>
-    n == null ? '—' : n.toString();
+  const fmt = (n: number | undefined) => (n == null ? '—' : n.toString());
 
   const handleSignOut = async () => {
     await authClient.signOut();

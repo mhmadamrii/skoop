@@ -4,8 +4,7 @@ Pre-auth & onboarding
 2. Welcome — 1–3 brief intro panels ("Belajar dalam 90 detik")
 3. Sign in
 4. Sign up
-5. Interest picker — pick 3–5 categories to seed the feed  
-
+5. Interest picker — pick 3–5 categories to seed the feed
 
 Bottom tabs (5)
 
@@ -20,15 +19,13 @@ Feed sub-surfaces (overlays/sheets, not full screens)
 11. Comments sheet — bottom sheet over feed
 12. Share sheet — bottom sheet
 13. Report / flag — bottom sheet
-14. Lesson detail — full description (tap title) — could also be a sheet  
-
+14. Lesson detail — full description (tap title) — could also be a sheet
 
 Discover sub-screens
 
 15. Search — input + results (lessons, creators, categories)
 16. Category detail — all lessons in one category, vertical or grid
-17. Creator profile — public profile of any creator (tap from feed)  
-
+17. Creator profile — public profile of any creator (tap from feed)
 
 Upload sub-flow
 
@@ -41,8 +38,7 @@ Library sub-screens
 
 22. Saved (default within Library)
 23. Watch history
-24. Streak detail — quiet, no guilt-trip per PRODUCT.md  
-
+24. Streak detail — quiet, no guilt-trip per PRODUCT.md
 
 You sub-screens
 
@@ -56,8 +52,7 @@ Cross-cutting state surfaces (build once, reuse)
 
 30. Empty states — no saves yet, no follows yet, no streak yet
 31. Error / offline — video-failed-to-load, no-connection
-32. Loading skeleton — feed cell, list rows  
-
+32. Loading skeleton — feed cell, list rows
 
 ---
 

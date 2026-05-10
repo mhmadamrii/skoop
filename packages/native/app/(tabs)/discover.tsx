@@ -1,33 +1,12 @@
-import {
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { router } from 'expo-router';
+import { CATEGORIES } from '@/lib/categories';
 
 const AVATAR = require('../../assets/images/placeholder.png');
-
-type Category = {
-  id: string;
-  label: string;
-  icon: React.ComponentProps<typeof Ionicons>['name'];
-};
-
-const CATEGORIES: Category[] = [
-  { id: 'sains', label: 'Sains', icon: 'flask' },
-  { id: 'sejarah', label: 'Sejarah', icon: 'hourglass' },
-  { id: 'koding', label: 'Koding', icon: 'code-slash' },
-  { id: 'finansial', label: 'Finansial', icon: 'cash' },
-  { id: 'bahasa', label: 'Bahasa', icon: 'language' },
-  { id: 'seni', label: 'Seni', icon: 'color-palette' },
-  { id: 'kesehatan', label: 'Kesehatan', icon: 'fitness' },
-  { id: 'bisnis', label: 'Bisnis', icon: 'briefcase' },
-];
 
 type Creator = {
   id: string;
@@ -79,6 +58,12 @@ export default function Discover() {
                   opacity: pressed ? 0.85 : 1,
                 })}
                 className='h-28 justify-between rounded-2xl bg-charcoal-warung-raised p-4'
+                onPress={() =>
+                  router.push({
+                    pathname: '/(screens)/(scroll)/[topicId]',
+                    params: { topicId: c.id },
+                  })
+                }
               >
                 <Ionicons name={c.icon} size={28} color='#E89638' />
                 <Text className='font-sans text-base font-semibold text-cream-lantern'>

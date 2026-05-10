@@ -16,12 +16,15 @@ export const haptics = {
     if (isIOS) Haptics.selectionAsync();
   },
   success: () => {
-    if (isIOS) Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    if (isIOS)
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
   },
   warning: () => {
-    if (isIOS) Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+    if (isIOS)
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
   },
   error: () => {
-    if (isIOS) Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+    if (isIOS)
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
   },
 };
