@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 import { haptics } from '../../utils/haptics';
+import { authClient } from '@/lib/auth-client';
 
 type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -43,6 +44,8 @@ const TABS: Record<string, TabConfig> = {
 };
 
 function CustomTabBar({ state, navigation }: BottomTabBarProps) {
+  const a = authClient.useSession();
+  console.log('auth current', a);
   return (
     <SafeAreaView edges={['bottom']} style={{ backgroundColor: '#0E0B08' }}>
       <View className='flex-row items-center justify-between border-t border-dim-smoke px-4 pb-1 pt-2'>

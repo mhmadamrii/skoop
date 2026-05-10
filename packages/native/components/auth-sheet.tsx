@@ -1,10 +1,19 @@
-import { forwardRef, useCallback, useMemo, useState } from 'react';
+import { router } from 'expo-router';
 import { Pressable, Text, View, type TextInputProps } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { withUniwind } from 'uniwind';
 import { authClient } from '@/lib/auth-client';
 import { useToast } from 'heroui-native';
 import { queryClient } from '@/utils/trpc';
+
+import {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   BottomSheetBackdrop,
@@ -35,6 +44,8 @@ export type AuthSheetRef = BottomSheetModal;
 export const AuthSheet = forwardRef<BottomSheetModal, AuthSheetProps>(
   function AuthSheet({ onSubmit, initialMode = 'signin' }, ref) {
     const { toast } = useToast();
+    const sheetRef = useRef<BottomSheetModal>(null);
+    useImperativeHandle(ref, () => sheetRef.current as BottomSheetModal);
     const [mode, setMode] = useState<Mode>(initialMode);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -78,6 +89,8 @@ export const AuthSheet = forwardRef<BottomSheetModal, AuthSheetProps>(
                   label: 'Signed in successfully',
                 });
                 queryClient.refetchQueries();
+                sheetRef.current?.dismiss();
+                router.push('/(tabs)/feed');
               },
             },
           );
@@ -102,6 +115,8 @@ export const AuthSheet = forwardRef<BottomSheetModal, AuthSheetProps>(
                   label: 'Signed up successfully',
                 });
                 queryClient.refetchQueries();
+                sheetRef.current?.dismiss();
+                router.push('/(tabs)/feed');
               },
             },
           );
@@ -120,7 +135,7 @@ export const AuthSheet = forwardRef<BottomSheetModal, AuthSheetProps>(
 
     return (
       <BottomSheetModal
-        ref={ref}
+        ref={sheetRef}
         snapPoints={snapPoints}
         backdropComponent={renderBackdrop}
         handleIndicatorStyle={{ backgroundColor: '#6e665a' }}

@@ -4,13 +4,7 @@ export default function Layout() {
   return (
     <Stack>
       <Stack.Screen
-        name='another'
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name='(scroll)'
+        name='[topicId]'
         options={{
           headerShown: false,
         }}

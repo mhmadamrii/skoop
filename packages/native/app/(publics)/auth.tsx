@@ -1,12 +1,13 @@
-import { useRef, useState } from 'react';
+import type { BottomSheetModal } from '@gorhom/bottom-sheet';
+
+import { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { AuthSheet } from '@/components/auth-sheet';
-import { useToast } from 'heroui-native';
+import { authClient } from '@/lib/auth-client';
 
 type AuthButtonProps = {
   label: string;
@@ -17,6 +18,7 @@ type AuthButtonProps = {
 export default function Auth() {
   const router = useRouter();
   const sheetRef = useRef<BottomSheetModal>(null);
+  const session = authClient.useSession();
   const [sheetMode, setSheetMode] = useState<'signin' | 'signup'>('signin');
 
   const enter = () => router.replace('/(tabs)/feed');
@@ -25,7 +27,10 @@ export default function Auth() {
     setSheetMode(mode);
     sheetRef.current?.present();
   };
-  const { toast } = useToast();
+
+  useEffect(() => {
+    if (session?.data?.user) router.push('/(tabs)/feed');
+  }, [session]);
   return (
     <View className='flex-1 bg-charcoal-warung'>
       <StatusBar style='light' />

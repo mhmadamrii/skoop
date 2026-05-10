@@ -4,6 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
+import { useQuery } from '@tanstack/react-query';
+import { authClient } from '@/lib/auth-client';
+import { trpc } from '@/utils/trpc';
 
 import {
   Pressable,
@@ -27,6 +30,25 @@ export default function Profile() {
   const { width: WIN_W } = useWindowDimensions();
   const gridSize = (WIN_W - 48 - 4) / 3;
 
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+  const avatarSource = user?.image ? { uri: user.image } : AVATAR;
+  const handle = user?.email
+    ? '@' + user.email.split('@')[0]
+    : '';
+
+  const { data: stats } = useQuery({
+    ...trpc.profile.stats.queryOptions(),
+    enabled: !!user,
+  });
+  const fmt = (n: number | undefined) =>
+    n == null ? '—' : n.toString();
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.replace('/(publics)');
+  };
+
   return (
     <View className='flex-1 bg-charcoal-warung'>
       <StatusBar style='light' />
@@ -35,7 +57,10 @@ export default function Profile() {
           contentContainerStyle={{ paddingBottom: 32 }}
           showsVerticalScrollIndicator={false}
         >
-          <View className='flex-row justify-end px-6 pt-2'>
+          <View className='flex-row justify-end gap-4 px-6 pt-2'>
+            <Pressable hitSlop={8} onPress={handleSignOut}>
+              <Ionicons name='log-out-outline' size={24} color='#FAF6EE' />
+            </Pressable>
             <Pressable hitSlop={8}>
               <Ionicons name='settings-outline' size={24} color='#FAF6EE' />
             </Pressable>
@@ -43,22 +68,22 @@ export default function Profile() {
 
           <View className='items-center px-6 pt-2'>
             <Image
-              source={AVATAR}
+              source={avatarSource}
               style={{ width: 96, height: 96, borderRadius: 48 }}
               contentFit='cover'
             />
             <Text className='mt-4 font-sans text-2xl font-bold text-cream-lantern'>
-              Adi P.
+              {user?.name ?? (isPending ? '' : 'Tamu')}
             </Text>
             <Text className='mt-1 font-sans text-base text-bright-smoke'>
-              @adipratama
+              {handle || user?.email || ''}
             </Text>
           </View>
 
           <View className='mt-6 flex-row px-6'>
-            <Stat n='12' label='MENGIKUTI' />
-            <Stat n='4' label='PENGIKUT' />
-            <Stat n='27' label='PELAJARAN' />
+            <Stat n={fmt(stats?.following)} label='MENGIKUTI' />
+            <Stat n={fmt(stats?.followers)} label='PENGIKUT' />
+            <Stat n={fmt(stats?.lessons)} label='PELAJARAN' />
           </View>
 
           <View className='mt-6 px-6'>

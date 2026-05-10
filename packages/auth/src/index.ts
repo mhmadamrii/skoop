@@ -15,22 +15,21 @@ export function createAuth() {
     trustedOrigins: [
       env.CORS_ORIGIN,
       'skoop://',
-      ...(process.env.NODE_ENV === 'development'
+      ...(env.NODE_ENV === 'development'
         ? [
             'exp://',
-            'exp://**',
-            'exp://192.168.*.*:*/**',
             'http://localhost:8081',
             'http://192.168.1.194:8081',
             'exp://192.168.1.194:8081',
+            'http://192.168.1.194:3000',
           ]
         : []),
     ],
     emailAndPassword: {
       enabled: true,
     },
-    secret: 'dYdtDAgBGWdLfNrUlsL4gBcYPheQ1l5Z',
-    baseURL: 'http://localhost:3000',
+    secret: env.BETTER_AUTH_SECRET,
+    baseURL: env.BETTER_AUTH_URL,
     advanced: {
       defaultCookieAttributes: {
         sameSite: 'none',
