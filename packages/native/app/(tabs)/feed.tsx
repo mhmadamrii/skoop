@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import {
   FlatList,
+  Platform,
   View,
   useWindowDimensions,
   type ListRenderItem,
@@ -15,7 +16,7 @@ export default function Feed() {
   const insets = useSafeAreaInsets();
   const tabBarHeight = useBottomTabBarHeight();
   const { height: WIN_H } = useWindowDimensions();
-  const cellHeight = WIN_H - tabBarHeight;
+  const cellHeight = Platform.OS === 'ios' ? WIN_H - tabBarHeight : WIN_H;
 
   const [data, setData] = useState<Lesson[]>(() => makeFeedBatch(0, 6));
 

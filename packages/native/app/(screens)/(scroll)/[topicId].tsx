@@ -1,5 +1,12 @@
 import { useMemo } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
+import { FeedCell } from '@/components/feed-cell';
+import { findCategory, otherCategories } from '@/lib/categories';
+import { makeTopicBatch, type Lesson } from '@/lib/lessons';
+
 import {
   FlatList,
   Pressable,
@@ -8,12 +15,6 @@ import {
   useWindowDimensions,
   type ListRenderItem,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
-import { FeedCell } from '@/components/feed-cell';
-import { findCategory, otherCategories } from '@/lib/categories';
-import { makeTopicBatch, type Lesson } from '@/lib/lessons';
 
 type FeedItem =
   | { kind: 'lesson'; lesson: Lesson }
