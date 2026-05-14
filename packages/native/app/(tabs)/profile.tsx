@@ -67,9 +67,7 @@ export default function Profile() {
   const { width: WIN_W } = useWindowDimensions();
   const GRID_GAP = 2;
   const GRID_PADDING = 24;
-  const gridSize = Math.floor(
-    (WIN_W - GRID_PADDING * 2 - GRID_GAP * 2) / 3,
-  );
+  const gridSize = Math.floor((WIN_W - GRID_PADDING * 2 - GRID_GAP * 2) / 3);
 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
