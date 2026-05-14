@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { withUniwind } from 'uniwind';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from 'heroui-native';
 import { trpc } from '@/utils/trpc';
 import { CATEGORIES, type CategoryId } from '@/lib/categories';
@@ -76,8 +76,12 @@ export default function Upload() {
   const bottomInset = Math.max(insets.bottom, 16);
   const abortRef = useRef<AbortController | null>(null);
 
+  const queryClient = useQueryClient();
   const createUploadUrlMutation = useMutation(
     trpc.storage.createUploadUrl.mutationOptions(),
+  );
+  const createLessonMutation = useMutation(
+    trpc.lesson.create.mutationOptions(),
   );
 
   const resetAll = useCallback(() => {
@@ -214,16 +218,20 @@ export default function Upload() {
         headers: { 'Content-Type': 'image/jpeg' },
         signal: controller.signal,
       });
-      setUploadPct(100);
+      setUploadPct(92);
 
-      // TODO: trpc.lesson.create once the router lands.
-      console.log('[upload] lesson payload', {
+      await createLessonMutation.mutateAsync({
         videoKey: videoSign.key,
         coverKey: coverSign.key,
         title: title.trim(),
         description: description.trim(),
-        categoryId,
-        duration: pick.duration,
+        categorySlug: categoryId,
+        duration: Math.max(1, Math.round(pick.duration ?? 0)),
+      });
+      setUploadPct(100);
+
+      await queryClient.invalidateQueries({
+        queryKey: trpc.lesson.feed.infiniteQueryKey(),
       });
 
       toast.show({
@@ -231,7 +239,7 @@ export default function Upload() {
         label: 'Pelajaran kamu sudah live.',
       });
       resetAll();
-      router.push('/(tabs)/profile');
+      router.push('/(tabs)/feed');
     } catch (err: any) {
       if (err?.name === 'AbortError') {
         toast.show({

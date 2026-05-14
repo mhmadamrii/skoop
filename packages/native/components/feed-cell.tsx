@@ -3,14 +3,16 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useVideoPlayer, VideoView } from 'expo-video';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSequence,
   withSpring,
 } from 'react-native-reanimated';
+
 import { findCategory } from '@/lib/categories';
-import { VIDEO_BG, type Lesson } from '@/lib/lessons';
+import { formatCount, VIDEO_BG, type Lesson } from '@/lib/lessons';
 
 const AVATAR = require('../assets/images/placeholder.png');
 
@@ -18,6 +20,7 @@ type FeedCellProps = {
   lesson: Lesson;
   height: number;
   topInset: number;
+  isActive?: boolean;
   showCategoryLabel?: boolean;
 };
 
@@ -25,6 +28,7 @@ export function FeedCell({
   lesson,
   height,
   topInset,
+  isActive = true,
   showCategoryLabel = true,
 }: FeedCellProps) {
   const [liked, setLiked] = useState(false);
@@ -43,16 +47,64 @@ export function FeedCell({
     );
   };
 
-  const category = findCategory(lesson.categoryId);
+  const player = useVideoPlayer(lesson.videoUrl ?? null, (p) => {
+    p.loop = true;
+    p.muted = false;
+  });
+
+  if (isActive && lesson.videoUrl) {
+    player.play();
+  } else {
+    player.pause();
+  }
+
+  const category =
+    findCategory(lesson.category.slug) ??
+    (lesson.category.name
+      ? {
+          id: lesson.category.slug,
+          label: lesson.category.name,
+          icon: 'pricetag' as const,
+        }
+      : null);
+
+  const creatorLabel = lesson.creator.handle.startsWith('@')
+    ? lesson.creator.handle
+    : `@${lesson.creator.handle}`;
 
   return (
     <View style={{ height }} className='bg-charcoal-warung'>
-      <Image
-        source={VIDEO_BG[lesson.bgIndex]}
-        style={StyleSheet.absoluteFill}
-        contentFit='cover'
-        transition={200}
-      />
+      {lesson.videoUrl ? (
+        <VideoView
+          player={player}
+          style={StyleSheet.absoluteFill}
+          contentFit='cover'
+          nativeControls={false}
+          allowsFullscreen={false}
+          allowsPictureInPicture={false}
+        />
+      ) : (
+        <Image
+          source={
+            lesson.thumbUrl
+              ? { uri: lesson.thumbUrl }
+              : VIDEO_BG[lesson.bgIndex]
+          }
+          style={StyleSheet.absoluteFill}
+          contentFit='cover'
+          transition={200}
+        />
+      )}
+
+      {lesson.videoUrl && lesson.thumbUrl && (
+        <Image
+          source={{ uri: lesson.thumbUrl }}
+          style={[StyleSheet.absoluteFill, { opacity: isActive ? 0 : 1 }]}
+          contentFit='cover'
+          transition={200}
+          pointerEvents='none'
+        />
+      )}
 
       <LinearGradient
         pointerEvents='none'
@@ -92,20 +144,26 @@ export function FeedCell({
       <View className='absolute bottom-6 left-5 right-20'>
         <View className='mb-3 flex-row items-center gap-2'>
           <Image
-            source={AVATAR}
+            source={
+              lesson.creator.avatarUrl
+                ? { uri: lesson.creator.avatarUrl }
+                : AVATAR
+            }
             style={{ width: 32, height: 32, borderRadius: 16 }}
             contentFit='cover'
           />
           <Text className='font-sans text-base font-semibold text-cream-lantern'>
-            {lesson.creator}
+            {creatorLabel}
           </Text>
         </View>
         <Text className='font-sans text-2xl font-bold leading-tight text-cream-lantern'>
           {lesson.title}
         </Text>
-        <Text className='mt-2 font-sans text-sm leading-relaxed text-cream-lantern'>
-          {lesson.description}
-        </Text>
+        {!!lesson.description && (
+          <Text className='mt-2 font-sans text-sm leading-relaxed text-cream-lantern'>
+            {lesson.description}
+          </Text>
+        )}
       </View>
 
       <View className='absolute bottom-8 right-3 items-center gap-6'>
@@ -118,14 +176,14 @@ export function FeedCell({
             />
           </Animated.View>
           <Text className='mt-1 font-sans text-xs font-medium text-cream-lantern'>
-            {lesson.likes}
+            {formatCount(lesson.counts.likes)}
           </Text>
         </Pressable>
 
         <Pressable hitSlop={8} className='items-center'>
           <Ionicons name='chatbubble-outline' size={28} color='#FAF6EE' />
           <Text className='mt-1 font-sans text-xs font-medium text-cream-lantern'>
-            {lesson.comments}
+            {formatCount(lesson.counts.comments)}
           </Text>
         </Pressable>
 
@@ -140,7 +198,7 @@ export function FeedCell({
             color={saved ? '#E89638' : '#FAF6EE'}
           />
           <Text className='mt-1 font-sans text-xs font-medium text-cream-lantern'>
-            {lesson.saves}
+            {formatCount(lesson.counts.saves)}
           </Text>
         </Pressable>
 

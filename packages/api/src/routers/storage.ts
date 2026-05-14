@@ -9,7 +9,7 @@ import { protectedProcedure, router } from '../index';
 const PUT_URL_TTL_SECONDS = 60;
 const GET_URL_TTL_SECONDS = 60 * 60;
 
-const MAX_BYTES = 25 * 1024 * 1024;
+const MAX_BYTES = 200 * 1024 * 1024;
 
 const ALLOWED_PREFIXES = ['avatars', 'lessons', 'thumbnails'] as const;
 type AllowedPrefix = (typeof ALLOWED_PREFIXES)[number];

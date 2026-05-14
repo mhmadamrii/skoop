@@ -1,4 +1,5 @@
 import { protectedProcedure, publicProcedure, router } from '../index';
+import { lessonRouter } from './lesson';
 import { profileRouter } from './profile';
 import { storageRouter } from './storage';
 
@@ -12,6 +13,7 @@ export const appRouter = router({
       user: ctx.session.user,
     };
   }),
+  lesson: lessonRouter,
   profile: profileRouter,
   storage: storageRouter,
 });
