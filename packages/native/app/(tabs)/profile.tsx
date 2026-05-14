@@ -21,14 +21,55 @@ const THUMB = require('../../assets/images/placeholder.png');
 
 type ProfileTab = 'created' | 'liked';
 
+type TabUnderlineProps = {
+  label: string;
+  active: boolean;
+  onPress: () => void;
+};
+
 const CREATED_IDS = Array.from({ length: 12 }, (_, i) => `c-${i}`);
 const LIKED_IDS = Array.from({ length: 9 }, (_, i) => `l-${i}`);
+
+function Stat({ n, label }: { n: string; label: string }) {
+  return (
+    <View className='flex-1 items-center'>
+      <Text className='font-sans text-xl font-bold text-cream-lantern'>
+        {n}
+      </Text>
+      <Text className='mt-0.5 font-sans text-xs font-medium tracking-wider text-bright-smoke'>
+        {label}
+      </Text>
+    </View>
+  );
+}
+
+function TabUnderline({ label, active, onPress }: TabUnderlineProps) {
+  return (
+    <Pressable onPress={onPress} hitSlop={8} className='items-center pb-3'>
+      <Text
+        className={
+          'font-sans text-base font-semibold ' +
+          (active ? 'text-cream-lantern' : 'text-bright-smoke')
+        }
+      >
+        {label}
+      </Text>
+      {active && (
+        <View className='absolute bottom-0 left-0 right-0 h-0.5 bg-saffron-500' />
+      )}
+    </Pressable>
+  );
+}
 
 export default function Profile() {
   const [tab, setTab] = useState<ProfileTab>('created');
   const items = tab === 'created' ? CREATED_IDS : LIKED_IDS;
   const { width: WIN_W } = useWindowDimensions();
-  const gridSize = (WIN_W - 48 - 4) / 3;
+  const GRID_GAP = 2;
+  const GRID_PADDING = 24;
+  const gridSize = Math.floor(
+    (WIN_W - GRID_PADDING * 2 - GRID_GAP * 2) / 3,
+  );
 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
@@ -39,6 +80,7 @@ export default function Profile() {
     ...trpc.profile.stats.queryOptions(),
     enabled: !!user,
   });
+
   const fmt = (n: number | undefined) => (n == null ? '—' : n.toString());
 
   const handleSignOut = async () => {
@@ -119,7 +161,10 @@ export default function Profile() {
               </Text>
             </View>
           ) : (
-            <View className='mt-2 flex-row flex-wrap gap-0.5 px-6'>
+            <View
+              className='mt-2 flex-row flex-wrap px-6'
+              style={{ gap: GRID_GAP }}
+            >
               {items.map((id) => (
                 <Pressable
                   key={id}
@@ -145,42 +190,5 @@ export default function Profile() {
         </ScrollView>
       </SafeAreaView>
     </View>
-  );
-}
-
-function Stat({ n, label }: { n: string; label: string }) {
-  return (
-    <View className='flex-1 items-center'>
-      <Text className='font-sans text-xl font-bold text-cream-lantern'>
-        {n}
-      </Text>
-      <Text className='mt-0.5 font-sans text-xs font-medium tracking-wider text-bright-smoke'>
-        {label}
-      </Text>
-    </View>
-  );
-}
-
-type TabUnderlineProps = {
-  label: string;
-  active: boolean;
-  onPress: () => void;
-};
-
-function TabUnderline({ label, active, onPress }: TabUnderlineProps) {
-  return (
-    <Pressable onPress={onPress} hitSlop={8} className='items-center pb-3'>
-      <Text
-        className={
-          'font-sans text-base font-semibold ' +
-          (active ? 'text-cream-lantern' : 'text-bright-smoke')
-        }
-      >
-        {label}
-      </Text>
-      {active && (
-        <View className='absolute bottom-0 left-0 right-0 h-0.5 bg-saffron-500' />
-      )}
-    </Pressable>
   );
 }
