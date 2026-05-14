@@ -1,11 +1,11 @@
+import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+
 import { Tabs } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-
 import { haptics } from '../../utils/haptics';
-import { authClient } from '@/lib/auth-client';
+import { Protected } from '@/components/protected';
 
 type IoniconsName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -44,8 +44,6 @@ const TABS: Record<string, TabConfig> = {
 };
 
 function CustomTabBar({ state, navigation }: BottomTabBarProps) {
-  const a = authClient.useSession();
-  console.log('auth current', a);
   return (
     <SafeAreaView edges={['bottom']} style={{ backgroundColor: '#0E0B08' }}>
       <View className='flex-row items-center justify-between border-t border-dim-smoke px-4 pb-1 pt-2'>
@@ -109,15 +107,17 @@ function CustomTabBar({ state, navigation }: BottomTabBarProps) {
 
 export default function TabLayout() {
   return (
-    <Tabs
-      tabBar={(props) => <CustomTabBar {...props} />}
-      screenOptions={{ headerShown: false }}
-    >
-      <Tabs.Screen name='feed' />
-      <Tabs.Screen name='discover' />
-      <Tabs.Screen name='upload' />
-      <Tabs.Screen name='library' />
-      <Tabs.Screen name='profile' />
-    </Tabs>
+    <Protected>
+      <Tabs
+        tabBar={(props) => <CustomTabBar {...props} />}
+        screenOptions={{ headerShown: false }}
+      >
+        <Tabs.Screen name='feed' />
+        <Tabs.Screen name='discover' />
+        <Tabs.Screen name='upload' />
+        <Tabs.Screen name='library' />
+        <Tabs.Screen name='profile' />
+      </Tabs>
+    </Protected>
   );
 }

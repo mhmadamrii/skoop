@@ -58,8 +58,7 @@ type Pick = {
 
 export default function Upload() {
   const { toast } = useToast();
-  const insets = useSafeAreaInsets();
-  const bottomInset = Math.max(insets.bottom, 16);
+
   const [step, setStep] = useState<Step>(0);
   const [pick, setPick] = useState<Pick | null>(null);
   const [frames, setFrames] = useState<string[]>([]);
@@ -72,6 +71,9 @@ export default function Upload() {
 
   const [uploading, setUploading] = useState(false);
   const [uploadPct, setUploadPct] = useState(0);
+
+  const insets = useSafeAreaInsets();
+  const bottomInset = Math.max(insets.bottom, 16);
   const abortRef = useRef<AbortController | null>(null);
 
   const createUploadUrlMutation = useMutation(
@@ -151,7 +153,7 @@ export default function Upload() {
 
   const canProceedDetail = !!title.trim() && !!categoryId;
 
-  const handleLanjutDetail = () => {
+  const handleContinueDetail = () => {
     if (!title.trim()) {
       setTitleError(true);
       return;
@@ -185,6 +187,7 @@ export default function Upload() {
         contentLength: videoBlob.size,
         ext: videoExt,
       });
+      console.log('videoSign', JSON.stringify(videoSign, null, 2));
       setUploadPct(25);
 
       await fetch(videoSign.url, {
@@ -310,7 +313,7 @@ export default function Upload() {
           pickReady={!!pick}
           detailReady={canProceedDetail}
           onNextFromPick={() => setStep(1)}
-          onNextFromDetail={handleLanjutDetail}
+          onNextFromDetail={handleContinueDetail}
           onPublish={handlePublish}
           disabled={uploading}
           bottomInset={bottomInset}
