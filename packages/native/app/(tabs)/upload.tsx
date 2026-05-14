@@ -1,4 +1,17 @@
+import * as ImagePicker from 'expo-image-picker';
+import * as VideoThumbnails from 'expo-video-thumbnails';
+
 import { useCallback, useMemo, useRef, useState } from 'react';
+import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { Image } from 'expo-image';
+import { Ionicons } from '@expo/vector-icons';
+import { withUniwind } from 'uniwind';
+import { useMutation } from '@tanstack/react-query';
+import { useToast } from 'heroui-native';
+import { trpc } from '@/utils/trpc';
+import { CATEGORIES, type CategoryId } from '@/lib/categories';
+
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -9,22 +22,11 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { router } from 'expo-router';
+
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
-import { Image } from 'expo-image';
-import { Ionicons } from '@expo/vector-icons';
-import { withUniwind } from 'uniwind';
-import * as ImagePicker from 'expo-image-picker';
-import * as VideoThumbnails from 'expo-video-thumbnails';
-import { useMutation } from '@tanstack/react-query';
-import { useToast } from 'heroui-native';
-
-import { trpc } from '@/utils/trpc';
-import { CATEGORIES, type CategoryId } from '@/lib/categories';
 
 const StyledSafeAreaView = withUniwind(SafeAreaView);
 
